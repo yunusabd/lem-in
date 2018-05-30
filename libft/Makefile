@@ -6,7 +6,7 @@
 #    By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/25 16:29:49 by yabdulha          #+#    #+#              #
-#    Updated: 2018/05/25 18:42:59 by yabdulha         ###   ########.fr        #
+#    Updated: 2018/05/29 20:18:49 by yabdulha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ FILES = ft_putchar ft_putstr ft_strcmp ft_strlen ft_strdup ft_strcpy ft_strcat \
 		ft_absolute ft_print_array ft_sqrt ft_strjoinfree ft_strdup_until \
 		ft_strpbrk ft_itoa_base ft_numlen ft_numlen_ll ft_numlen_max \
 		ft_numlen_umax ft_itoa_base_u ft_itoa_base_max ft_tolowercase \
-		ft_strmap_p
+		ft_strmap_p ft_isnumber ft_isprint_s
 FT_C =	$(patsubst %,%.c,$(FILES))
 OBJ  =	$(patsubst %,%.o,$(FILES))
 PRINTF_PATH = ft_printf/
