@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 11:33:16 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/05/30 23:17:47 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/03 20:18:14 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,70 +21,75 @@
 
 #include "includes/lem-in.h"
 
-void	check_room(t_farm *farm, t_info *info, char **arr)
+void	detect_type(t_farm *farm, t_info *info)
 {
-//TODO free arr
-	if (ft_strchr(arr[0], '-'))
-	{
-		farm->error = ft_strdup("Dash in room name");
-		parsing_error_handler(farm, );
-	}
-	if (!(ft_isnumber(arr[1]) && (ft_isnumber(arr[2]))))
-	{
-		farm->error = ft_strdup("Malformatted line");
-		parsing_error_handler(farm, NULL);
-	}
-}
-
-void	detect_type(t_farm *farm, t_info *info, char *s)
-{
-	char	**arr;
-
-	if (ft_isnumber(s) && !ft_strchr(s, ' '))
+	ft_printf("%s\n", info->line);
+	if (ft_count_char(info->line, '-') > 1)
+		parsing_error_handler(farm, info);
+	if (!(farm->flag) && ft_isnumber(info->line) && (!(ft_strchr(info->line, ' '))))
 		info->type = ANTS;
-	else if (ft_strcmp(s, "##start") == 0)
-		info->type = START;
-	else if (ft_strcmp(s, "##end") == 0)
-		info->type = END;
-	else if (*s == '#')
+	else if (!(farm->flag) && ft_strcmp(info->line, "##start") == 0)
+		farm->flag = START;
+	else if (!(farm->flag) && ft_strcmp(info->line, "##end") == 0)
+		farm->flag = END;
+	else if (!(farm->flag) && *(info->line) == '#')
 		info->type = COMMENT;
-	else if (ft_strchr(s, '-') && (!(ft_strchr(ft_strchr(s, '-') + 1, '-'))))
-		info->type = LINK;
-	// OR: check for dashes in room names, return error when there's a dash
+	else if (!(farm->flag) && ft_strchr(info->line, '-') &&
+			(!(ft_count_char(info->line, '-'))))
+		read_link(farm, info);
 	else
 	{
-		// Room + coordinates
+		if (!(ft_count_char(info->line, ' ') > 1))
+			parsing_error_handler(farm, info);
 		info->type = ROOM;
-		arr = split_line(s, ' ');
-		check_room(farm, info, arr);
-//		while (arr)
-//			printf("arr: %s\n", *(arr++));
+		check_room(farm, info);
+		add_room(farm, info);
+		farm->flag = 0;
 	}
 }
 
 void	read_input(t_farm *farm)
 {
-	char	*line;
 	t_info	*info;
-	int		i = 0;
 
-
-	while (get_next_line(0, &line) == 1)
+	info = (t_info*)malloc(sizeof(*info));
+	info->line = NULL;
+	info->x = 0;
+	info->y = 0;
+	info->line_no = 1;
+	while (get_next_line(0, &(info->line)) == 1)
 	{
-		info = (t_info*)malloc(sizeof(info));
 		info->type = 0;
-		detect_type(farm, info, line);
-
-		printf("line %d type: %d\n", i++ + 1, info->type);
-		free(info);
+		info->arr = NULL;
+		info->line_no++;
+		detect_type(farm, info);
+		free_arr(info->arr);
+		free(info->arr);
+		free(info->line);
+		info->line = NULL;
 	}
+	free_info(info);
 }
 
 int		main()
 {
 	t_farm	*farm;
+	int		rooms;
+	t_link	*tmp;
+	t_link	*link;
+	t_link	*new;
 
 	farm = build_farm();
 	read_input(farm);
+	if (!((farm->start) && (farm->end)))
+		parsing_error_handler(farm, NULL);
+	printf("start: %s, end: %s\n", farm->start->s, farm->end->s);
+	tmp = farm->start->links;
+	link = create_link(farm, ft_hash(farm->start->s, count_rooms(farm)), NULL, NULL);
+	new = next_level(farm, link);
+	solver(farm, new, 0);
+	printf("rooms: %d\n", farm->room_no);
+	free_ht(farm);
+	parsing_error_handler(farm, NULL);
 	return (0);	
 }

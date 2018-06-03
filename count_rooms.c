@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isnumber.c                                      :+:      :+:    :+:   */
+/*   count_rooms.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/29 12:18:50 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/02 12:39:29 by yabdulha         ###   ########.fr       */
+/*   Created: 2018/05/31 01:25:20 by yabdulha          #+#    #+#             */
+/*   Updated: 2018/05/31 01:27:31 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "lem-in.h"
 
-/*
-** Checks if a given string is a number, only allow minus, plus and spaces.
-*/
-
-int		ft_isnumber(char *s)
+int		count_rooms(t_farm *farm)
 {
-	int	i;
+	int		i;
+	t_room	*tmp;
 
-	i = 0;
-	if (!s || !(*s))
+	if (!farm || !(farm->rooms))
 		return (0);
-	while (*s && *s == 32)
-		s++;
-	if (*s == '-' || *s == '+')
-		s++;
-	while (s[i])
+	i = 0;
+	tmp = farm->rooms;
+	while (tmp != NULL)
 	{
-		if (ft_isdigit(s[i]))
-			i++;
-		else if (s[i] == ' ')
-			s++;
-		else
-			return (0);
+		i++;
+		tmp = tmp->next;
 	}
-	return ((i) ? 1 : 0);
+	return (i);
 }

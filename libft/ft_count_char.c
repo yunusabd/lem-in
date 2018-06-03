@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isnumber.c                                      :+:      :+:    :+:   */
+/*   ft_count_char.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/29 12:18:50 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/02 12:39:29 by yabdulha         ###   ########.fr       */
+/*   Created: 2018/06/03 19:43:15 by yabdulha          #+#    #+#             */
+/*   Updated: 2018/06/03 19:48:08 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-** Checks if a given string is a number, only allow minus, plus and spaces.
-*/
-
-int		ft_isnumber(char *s)
+int		ft_count_char(char *s, char c)
 {
-	int	i;
+	int		i;
 
 	i = 0;
-	if (!s || !(*s))
-		return (0);
-	while (*s && *s == 32)
-		s++;
-	if (*s == '-' || *s == '+')
-		s++;
-	while (s[i])
+	while (*s)
 	{
-		if (ft_isdigit(s[i]))
+		if (*s == c)
 			i++;
-		else if (s[i] == ' ')
-			s++;
-		else
-			return (0);
+		s++;
 	}
-	return ((i) ? 1 : 0);
+	return (i);
 }

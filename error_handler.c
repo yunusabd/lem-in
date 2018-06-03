@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 22:30:17 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/05/30 22:31:18 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/03 20:18:38 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,39 +44,51 @@ static void		free_rooms(t_farm *farm)
 	}
 }
 
-void		free_c(t_farm *farm)
+void		free_links(t_farm *farm)
 {
-	t_cn	*tmp;
+	t_link	*tmp;
 
-	if (farm->c)
+	if (farm->links)
 	{
-		while (farm->c)
+		while (farm->links)
 		{
-			tmp = farm->c->next;
-			free(farm->c);
-			farm->c = tmp;
+			tmp = farm->links->next;
+			free(farm->links);
+			farm->links = tmp;
 		}
-		free(farm->c);
+		free(farm->links);
 	}
+}
+
+void			free_info(t_info *info)
+{
+	int	i;
+
+	i = 0;
+	if ((info->line))
+		free(info->line);
+	free_arr(info->arr);
+	free(info);
 }
 
 void			parsing_error_handler(t_farm *farm, t_info *info)
 {
 	if (!farm)
 		exit(1);
-	ft_printf("%s\n", farm->error);
+	if (info)
+		ft_printf("%s at line %d\n", farm->error, info->line_no);
+	else
+		ft_printf("Invalid input\n");
 	if ((farm->ants))
 		free_ants(farm);
 	if ((farm->rooms))
 		free_rooms(farm);
-	/*
-	if ((farm->c))
-		free_c(farm);
+	if ((farm->links))
+		free_links(farm);
 	if ((info))
-	{
-		free(info);
-	}
+		free_info(info);
+	free(farm->error);
 	free(farm);
-	*/
+	while (1);
 	exit(1);
 }
