@@ -6,12 +6,38 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 22:48:37 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/02 00:11:21 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/05 18:30:55 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
+/*
+void			add_free(t_farm *farm, t_free *level)
+{
+	if (!(farm->free))
+	{
+		//create element
+		if ()
+	}
+	else
+	{
+		//add to list
+	}
+}
+*/
+
+void			free_levels(t_link *level)
+{
+	t_link	*tmp;
+
+	while (level)
+	{
+		tmp = level->next;
+		free(level);
+		level = tmp;
+	}
+}
 
 static int		check_links(t_farm *farm, t_link *links)
 {
@@ -76,10 +102,13 @@ int				solver(t_farm *farm, t_link *links, int depth)
 		return (1);
 	else
 	{
-		// make new list for next level.
-		links = next_level(farm, links);
+		if (!(links = next_level(farm, links)))
+			parsing_error_handler(farm, NULL);
 		if (solver(farm, links, depth + 1))
+		{
+			free_levels(links);
 			return (1);
+		}
 	}
 	return (0);
 }

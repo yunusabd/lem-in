@@ -6,13 +6,29 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 23:49:46 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/03 20:27:43 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/05 20:12:28 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/lem-in.h"
 
-void	check_room(t_farm *farm, t_info *info)
+static void	check_duplicate(t_farm *farm, t_info *info, char *name)
+{
+	t_room *tmp;
+
+	tmp = farm->rooms;
+	while (tmp)
+	{
+		if (ft_strcmp(tmp->s, name) == 0)
+		{
+			farm->error = ft_strdup("Duplicate room name");
+			parsing_error_handler(farm, info);
+		}
+		tmp = tmp->next;
+	}
+}
+
+void		check_room(t_farm *farm, t_info *info)
 {
 	if (ft_count_char(info->line, ' ') > 1)
 	{
@@ -27,9 +43,11 @@ void	check_room(t_farm *farm, t_info *info)
 			farm->error = NULL;
 		parsing_error_handler(farm, info);
 	}
-	if (!(info->arr[0]) || !(ft_isnumber(info->arr[1]) && (ft_isnumber(info->arr[2]))))
+	if (!(info->arr[0]) ||
+			(!(ft_isnumber(info->arr[1]) && (ft_isnumber(info->arr[2])))))
 	{
 		farm->error = ft_strdup("Error");
 		parsing_error_handler(farm, info);
 	}
+	check_duplicate(farm, info, info->arr[0]);
 }

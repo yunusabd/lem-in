@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 00:12:53 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/01 14:14:52 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/04 23:26:55 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static t_room	*create_rooms(t_farm *farm, t_info *info)
 	new->s = ft_strdup(info->arr[0]);
 	new->x = ft_atoi(info->arr[1]);
 	new->y = ft_atoi(info->arr[2]);
+	new->links = NULL;
 	new->next = NULL;
 	new->visited = 0;
 	new->flag = farm->flag;
@@ -62,6 +63,7 @@ void	add_room(t_farm *farm, t_info *info)
 		new->x = ft_atoi(info->arr[1]);
 		new->y = ft_atoi(info->arr[2]);
 		new->flag = farm->flag;
+		new->links = NULL;
 		new->next = NULL;
 		new->visited = 0;
 		tmp = farm->rooms;

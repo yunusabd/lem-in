@@ -6,7 +6,7 @@
 #    By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/19 13:45:52 by yabdulha          #+#    #+#              #
-#    Updated: 2018/05/31 22:48:46 by yabdulha         ###   ########.fr        #
+#    Updated: 2018/06/04 18:21:46 by yabdulha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = lem-in
 
 SRC_FILES = parser.c split_line.c get_next_line.c build_farm.c error_handler.c \
 			check_room.c rooms_list.c count_rooms.c hash.c read_links.c \
-			links_list.c solver.c
+			links_list.c solver.c options.c
 
 SRCS = $(SRC_FILES)
 

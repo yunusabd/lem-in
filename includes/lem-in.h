@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 20:47:36 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/03 20:19:04 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/05 19:14:29 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@
 # define ERROR 6
 
 
-# define VISUALIZER (1 << 0)
-# define USAGE 	(1 << 1)
-# define MOVES 	(1 << 2)
-# define COLORS	(1 << 3)
-# define HIDE 	(1 << 4)
-# define SLOW 	(1 << 5)
+# define PRINT_SE	(1 << ('p' - 97))
+# define DEBUG		(1 << ('d' - 97))
+# define HT			(1 << ('h' - 97))
+# define COLORS		(1 << 3)
+# define HIDE		(1 << 4)
+# define SLOW		(1 << 5)
 
 typedef struct	s_room t_room;
 
@@ -68,6 +68,13 @@ typedef struct	s_room
 	struct s_room	*next;
 }				t_room;
 
+typedef struct	s_free
+{
+	t_link			*link;
+	t_link			*next;
+}				t_free;
+
+
 typedef struct	s_ant
 {
 	int				nb;
@@ -92,8 +99,14 @@ typedef struct	s_farm
 	t_room			*end;
 	t_data			**hashtable;
 	int				room_no;
+	int				flags;
+	t_link			*free;
 }				t_farm;
 
+int				options(char *s);
+
+void			free_ht(t_farm *farm);
+void			free_levels(t_link *level);
 char			**split_line(char *s, char c);
 void			free_arr(char **arr);
 void			free_info(t_info *info);

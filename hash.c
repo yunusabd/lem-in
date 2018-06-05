@@ -61,12 +61,11 @@ void	free_ht(t_farm *farm)
 	unsigned int	hash;
 
 	tmp = farm->rooms;
-	while (farm->rooms)
+	while (tmp)
 	{
-		tmp = farm->rooms->next;
-		hash = ft_hash(farm->rooms->s, farm->room_no);
+		hash = ft_hash(tmp->s, farm->room_no);
 		free(farm->hashtable[hash]);
-		farm->rooms = tmp;
+		tmp = tmp->next;
 	}
 	free(farm->hashtable);
 }

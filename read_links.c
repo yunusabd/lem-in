@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 17:12:37 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/03 20:19:25 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/05 20:17:10 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	read_link(t_farm *farm, t_info *info)
 {
 	char	**rooms;
 	int		size;
-	t_data	*tmp;
 	int		i;
 	unsigned int	hash1;
 	unsigned int	hash2;
@@ -37,9 +36,12 @@ void	read_link(t_farm *farm, t_info *info)
 	hash2 = ft_hash(rooms[1], size);
 	if (!(((farm->hashtable)[hash1]) && (farm->hashtable)[hash2]))
 	{
-		farm->error = ft_strdup("Link between nonexistent rooms");
+		farm->error = ft_strdup("Bad link");
 		parsing_error_handler(farm, info);
 	}
+	free(rooms[0]);
+	free(rooms[1]);
+	free(rooms);
 	add_link(farm, farm->hashtable[hash1]->ptr, hash2);
 	add_link(farm, farm->hashtable[hash2]->ptr, hash1);
 }
