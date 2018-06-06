@@ -6,11 +6,11 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 22:30:17 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/05 20:13:14 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/07 01:29:15 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 static void		free_ants(t_farm *farm)
 {
@@ -52,7 +52,7 @@ static void		free_rooms(t_farm *farm)
 	}
 }
 
-void		free_links(t_farm *farm)
+void			free_links(t_farm *farm)
 {
 	t_link	*tmp;
 
@@ -89,8 +89,8 @@ void			parsing_error_handler(t_farm *farm, t_info *info)
 	if (info)
 		ft_printf("%s at line %d\n", (farm->error) ? farm->error : "Error",
 				info->line_no);
-	else
-		ft_printf("Invalid input\n");
+	else if (farm->error)
+		ft_printf("%s\n", farm->error);
 	if ((farm->ants))
 		free_ants(farm);
 	if ((farm->hashtable))
@@ -101,8 +101,8 @@ void			parsing_error_handler(t_farm *farm, t_info *info)
 		free_links(farm);
 	if ((info))
 		free_info(info);
+	free_path(farm);
 	free(farm->error);
 	free(farm);
-	//while(1);
 	exit(1);
 }

@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 16:57:14 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/05/30 22:41:54 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/07 00:48:46 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int					get_next_line(const int fd, char **line)
 	static t_list	*head = NULL;
 	t_list			*current;
 
-	if (fd < 0 || line == NULL || BUFF_SIZE < 1 || (!((*line) = ft_memalloc(1))))
+	if (fd < 0 || line == NULL || BUFF_SIZE < 1 || (!(*line = ft_memalloc(1))))
 		return (-1);
 	if (!(current = find_fd(fd, head)))
 		ft_lstadd(&head, (current = create_fd_elem(fd)));

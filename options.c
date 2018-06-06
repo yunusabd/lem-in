@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   moves.c                                            :+:      :+:    :+:   */
+/*   options.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/05 19:11:27 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/05/17 17:17:59 by yabdulha         ###   ########.fr       */
+/*   Created: 2018/05/23 15:55:42 by yabdulha          #+#    #+#             */
+/*   Updated: 2018/06/07 01:29:15 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "lem_in.h"
 
-void		rra(t_frame *stacks)
+/*
+** If the first character is '-', check if it is an options argument and set
+** the flags accordingly. Return 0 if there's not a character after the dash.
+*/
+
+int	options(char *s)
 {
-	if (stacks->a && stacks->a->prev)
+	int	i;
+	int	res;
+
+	if (s[0] != '-')
+		return (0);
+	i = 1;
+	res = 0;
+	while (s[i] != '\0')
 	{
-		stacks->a = stacks->a->prev;
-		add_list(stacks, RRA);
+		if (!ft_isalpha(s[(i)]))
+			return (0);
+		res |= (1 << (s[i] - 97));
+		i++;
 	}
-}
-
-void		rrb(t_frame *stacks)
-{
-	if (stacks->b && stacks->b->prev)
-	{
-		stacks->b = stacks->b->prev;
-		add_list(stacks, RRB);
-	}
-}
-
-void		rrr(t_frame *stacks)
-{
-	rra(stacks);
-	rrb(stacks);
+	return (res);
 }

@@ -6,11 +6,11 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 00:12:53 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/04 23:26:55 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/07 01:29:15 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 static t_room	*create_rooms(t_farm *farm, t_info *info)
 {
@@ -25,13 +25,14 @@ static t_room	*create_rooms(t_farm *farm, t_info *info)
 	new->links = NULL;
 	new->next = NULL;
 	new->visited = 0;
+	new->occupied = 0;
 	new->flag = farm->flag;
 	(farm->flag == START) ? farm->start = new : 0;
 	(farm->flag == END) ? farm->end = new : 0;
 	return (new);
 }
 
-void	delete_room(t_farm *farm, t_room *room)
+void			delete_room(t_farm *farm, t_room *room)
 {
 	t_room	*tmp;
 
@@ -46,7 +47,7 @@ void	delete_room(t_farm *farm, t_room *room)
 	}
 }
 
-void	add_room(t_farm *farm, t_info *info)
+void			add_room(t_farm *farm, t_info *info)
 {
 	t_room		*new;
 	t_room		*tmp;
@@ -72,5 +73,5 @@ void	add_room(t_farm *farm, t_info *info)
 		tmp->next = new;
 		(farm->flag == START) ? farm->start = new : 0;
 		(farm->flag == END) ? farm->end = new : 0;
-	}	
+	}
 }

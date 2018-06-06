@@ -6,26 +6,11 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 22:48:37 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/05 18:30:55 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/07 01:29:29 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
-
-/*
-void			add_free(t_farm *farm, t_free *level)
-{
-	if (!(farm->free))
-	{
-		//create element
-		if ()
-	}
-	else
-	{
-		//add to list
-	}
-}
-*/
+#include "lem_in.h"
 
 void			free_levels(t_link *level)
 {
@@ -44,15 +29,14 @@ static int		check_links(t_farm *farm, t_link *links)
 	t_link	*tmp;
 
 	tmp = links;
-	printf("check links\n");
 	while (tmp)
 	{
 		if (farm->hashtable[tmp->hash]->ptr == farm->end)
 		{
-			printf("last room: %s\n", farm->hashtable[tmp->hash]->ptr->s);
+			add_path(farm, farm->hashtable[tmp->hash]->ptr);
 			while (tmp->par)
 			{
-				printf("par: %s\n", farm->hashtable[tmp->par->hash]->ptr->s);
+				add_path(farm, farm->hashtable[tmp->par->hash]->ptr);
 				tmp->par = tmp->par->par;
 			}
 			return (1);
@@ -63,15 +47,12 @@ static int		check_links(t_farm *farm, t_link *links)
 	return (0);
 }
 
-t_link			*next_level(t_farm *farm, t_link *old)
+t_link			*next_level(t_farm *farm, t_link *old, t_link *new)
 {
 	t_link	*tmp;
 	t_link	*tmp2;
-	t_link	*new;
 
 	tmp = old;
-	new = NULL;
-	printf("next level\n");
 	while (tmp)
 	{
 		tmp2 = farm->hashtable[tmp->hash]->ptr->links;
@@ -80,9 +61,11 @@ t_link			*next_level(t_farm *farm, t_link *old)
 			if (farm->hashtable[tmp2->hash]->ptr->visited == 0)
 			{
 				if (!new)
-					new = create_link(farm, tmp2->hash, farm->hashtable[tmp->hash]->ptr, tmp);
+					new = create_link(farm, tmp2->hash,
+							farm->hashtable[tmp->hash]->ptr, tmp);
 				else
-					save_link(farm, new, tmp2->hash, farm->hashtable[tmp->hash]->ptr, tmp);
+					save_link(farm, new, tmp2->hash,
+							farm->hashtable[tmp->hash]->ptr, tmp);
 				farm->hashtable[tmp2->hash]->ptr->visited = 1;
 			}
 			tmp2 = tmp2->next;
@@ -91,7 +74,6 @@ t_link			*next_level(t_farm *farm, t_link *old)
 	}
 	return (new);
 }
-
 
 int				solver(t_farm *farm, t_link *links, int depth)
 {
@@ -102,7 +84,7 @@ int				solver(t_farm *farm, t_link *links, int depth)
 		return (1);
 	else
 	{
-		if (!(links = next_level(farm, links)))
+		if (!(links = next_level(farm, links, NULL)))
 			parsing_error_handler(farm, NULL);
 		if (solver(farm, links, depth + 1))
 		{

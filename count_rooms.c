@@ -6,11 +6,11 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 01:25:20 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/05/31 01:27:31 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/07 01:29:15 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 int		count_rooms(t_farm *farm)
 {

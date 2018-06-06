@@ -1,8 +1,16 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hash.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/07 00:49:00 by yabdulha          #+#    #+#             */
+/*   Updated: 2018/06/07 01:29:15 by yabdulha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 int		ft_hash(char *str, int rooms)
 {
@@ -34,7 +42,7 @@ t_data	**create_ht(int size)
 	i = 0;
 	if (!(new = (t_data**)malloc(sizeof(t_data) * size * 100)))
 		return (NULL);
-	while (i < (size *100))
+	while (i < (size * 100))
 		new[i++] = NULL;
 	return (new);
 }
@@ -54,7 +62,6 @@ void	fill_hashtable(t_farm *farm, t_info *info)
 	}
 }
 
-//TODO
 void	free_ht(t_farm *farm)
 {
 	t_room			*tmp;
@@ -69,11 +76,3 @@ void	free_ht(t_farm *farm)
 	}
 	free(farm->hashtable);
 }
-
-/*
-int		main(int argc, char **argv)
-{
-	printf("input: [%s], hash: [%d]\n", argv[1], ft_hash(argv[1], atoi(argv[2])));
-	return (0);
-}
-*/

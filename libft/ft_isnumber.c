@@ -6,14 +6,14 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 12:18:50 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/02 12:39:29 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/07 00:30:41 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-** Checks if a given string is a number, only allow minus, plus and spaces.
+** Checks if a given string is a number, only allowing minus, plus and spaces.
 */
 
 int		ft_isnumber(char *s)
@@ -32,7 +32,11 @@ int		ft_isnumber(char *s)
 		if (ft_isdigit(s[i]))
 			i++;
 		else if (s[i] == ' ')
+		{
 			s++;
+			if (ft_isdigit(s[i]))
+				return (0);
+		}
 		else
 			return (0);
 	}

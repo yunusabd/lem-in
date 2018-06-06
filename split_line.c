@@ -6,11 +6,11 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 12:30:23 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/03 20:28:59 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/07 01:29:29 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 static char	**ft_putwords(char *s, char c, char **arr, int words)
 {
@@ -36,11 +36,7 @@ static char	**ft_putwords(char *s, char c, char **arr, int words)
 		else
 			s--;
 	}
-	if (words > 0)
-		arr[0] = NULL;
-	else
-		arr[0] = ft_strdup(tmp);
-//	arr[0] = (words > 0) ? NULL : ft_strdup(tmp);
+	arr[0] = (words > 0) ? NULL : ft_strdup(tmp);
 	return (arr);
 }
 

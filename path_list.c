@@ -6,44 +6,50 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 00:12:53 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/05/22 12:02:50 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/07 01:29:15 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "lem_in.h"
 
-void	add_list(t_frame *stacks, int move)
+void			free_path(t_farm *farm)
 {
-	t_moves	*new;
+	t_path	*tmp;
 
-	if (!(new = (t_moves*)malloc(sizeof(*new))))
-		error_exit(stacks);
-	new->move = move;
-	new->next = stacks->moves;
-	new->prev = stacks->moves->prev;
-	stacks->moves->prev->next = new;
-	stacks->moves->prev = new;
-}
-
-void	create_moves(t_frame *stacks, int move)
-{
-	t_moves	*new;
-
-	if (!(new = (t_moves*)malloc(sizeof(*new))))
-		error_exit(stacks);
-	new->move = move;
-	new->next = new;
-	new->prev = new;
-	stacks->moves = new;
-}
-
-void	delete_move(t_frame *stacks, t_moves *move)
-{
-	if ((stacks->moves))
+	while (farm->path)
 	{
-		move->prev->next = move->next;
-		move->next->prev = move->prev;
-		free(move);
-		move = NULL;
+		tmp = farm->path->next;
+		free(farm->path);
+		farm->path = tmp;
+	}
+}
+
+static t_path	*create_path(t_farm *farm, t_room *room)
+{
+	t_path	*new;
+
+	if (!(new = (t_path*)malloc(sizeof(*new))))
+		parsing_error_handler(farm, NULL);
+	new->room = room;
+	new->occupied = 0;
+	new->next = NULL;
+	return (new);
+}
+
+void			add_path(t_farm *farm, t_room *room)
+{
+	t_path	*new;
+	t_path	*tmp;
+
+	if (!(farm->path))
+		farm->path = create_path(farm, room);
+	else
+	{
+		if (!(new = (t_path*)malloc(sizeof(*new))))
+			parsing_error_handler(farm, NULL);
+		new->room = room;
+		new->occupied = 0;
+		new->next = farm->path;
+		farm->path = new;
 	}
 }

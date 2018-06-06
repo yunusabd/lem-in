@@ -6,13 +6,14 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 21:57:26 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/02 00:07:30 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/07 01:29:15 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
-t_link			*create_link(t_farm *farm, unsigned int hash, t_room *parent, t_link *par)
+t_link	*create_link(t_farm *farm, unsigned int hash,
+		t_room *parent, t_link *par)
 {
 	t_link	*new;
 
@@ -27,7 +28,7 @@ t_link			*create_link(t_farm *farm, unsigned int hash, t_room *parent, t_link *p
 	return (new);
 }
 
-void			delete_link(t_farm *farm, t_link *cn)
+void	delete_link(t_farm *farm, t_link *cn)
 {
 	t_link	*tmp;
 
@@ -42,7 +43,8 @@ void			delete_link(t_farm *farm, t_link *cn)
 	}
 }
 
-void			save_link(t_farm *farm, t_link *head, unsigned int hash, t_room *parent, t_link *par)
+void	save_link(t_farm *farm, t_link *head, unsigned int hash,
+		t_room *parent, t_link *par)
 {
 	t_link	*new;
 	t_link	*tmp;
@@ -59,10 +61,10 @@ void			save_link(t_farm *farm, t_link *head, unsigned int hash, t_room *parent, 
 	tmp = head;
 	while (tmp && tmp->next != NULL)
 		tmp = tmp->next;
-	tmp->next = new;	
+	tmp->next = new;
 }
 
-void			add_link(t_farm *farm, t_room *room, unsigned int hash)
+void	add_link(t_farm *farm, t_room *room, unsigned int hash)
 {
 	t_link	*new;
 	t_link	*tmp;
@@ -80,5 +82,5 @@ void			add_link(t_farm *farm, t_room *room, unsigned int hash)
 	if (!(room->links))
 		room->links = new;
 	else
-		tmp->next = new;	
+		tmp->next = new;
 }

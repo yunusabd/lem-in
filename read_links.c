@@ -6,17 +6,31 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 17:12:37 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/05 20:17:10 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/07 01:29:15 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
-void	read_link(t_farm *farm, t_info *info)
+static void		create_hashtable(t_farm *farm, t_info *info, int size)
 {
-	char	**rooms;
-	int		size;
-	int		i;
+	if (!(farm->hashtable = create_ht(size)))
+		parsing_error_handler(farm, info);
+	fill_hashtable(farm, info);
+}
+
+static void		free_rooms(char **rooms)
+{
+	free(rooms[0]);
+	free(rooms[1]);
+	free(rooms);
+}
+
+void			read_link(t_farm *farm, t_info *info)
+{
+	char			**rooms;
+	int				size;
+	int				i;
 	unsigned int	hash1;
 	unsigned int	hash2;
 
@@ -27,11 +41,7 @@ void	read_link(t_farm *farm, t_info *info)
 		parsing_error_handler(farm, info);
 	size = (farm->room_no < 100) ? 100 : farm->room_no;
 	if (!(farm->hashtable))
-	{
-		if (!(farm->hashtable = create_ht(size)))
-			parsing_error_handler(farm, info);
-		fill_hashtable(farm, info);
-	}
+		create_hashtable(farm, info, size);
 	hash1 = ft_hash(rooms[0], size);
 	hash2 = ft_hash(rooms[1], size);
 	if (!(((farm->hashtable)[hash1]) && (farm->hashtable)[hash2]))
@@ -39,9 +49,7 @@ void	read_link(t_farm *farm, t_info *info)
 		farm->error = ft_strdup("Bad link");
 		parsing_error_handler(farm, info);
 	}
-	free(rooms[0]);
-	free(rooms[1]);
-	free(rooms);
+	free_rooms(rooms);
 	add_link(farm, farm->hashtable[hash1]->ptr, hash2);
 	add_link(farm, farm->hashtable[hash2]->ptr, hash1);
 }
