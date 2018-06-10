@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 20:37:11 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/07 01:29:15 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/10 23:17:29 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,14 @@ void	send_ants(t_farm *farm)
 			tmp->path->occupied = 0;
 			tmp->path = tmp->path->next;
 			tmp->path->occupied = 1;
-			ft_printf("L%d-%s ", tmp->nb, tmp->path->room->s);
+			(tmp != farm->ants) ? ft_printf(" ") : 0;
+			ft_printf("L%d-%s", tmp->nb, tmp->path->room->s);
 		}
 		tmp = tmp->next;
 		if (!(tmp))
 		{
 			tmp = farm->ants;
-			ft_printf("\n");
+			(tmp) ? ft_printf("\n") : 0;
 		}
 	}
 }

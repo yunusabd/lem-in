@@ -6,7 +6,7 @@
 #    By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/02 19:26:07 by yabdulha          #+#    #+#              #
-#    Updated: 2018/05/25 18:14:01 by yabdulha         ###   ########.fr        #
+#    Updated: 2018/06/10 23:19:29 by yabdulha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ $(LIB):
 	make -C $(LIBPATH) all
 	cp $(LIB) $(NAME)
 
-$(FT_O_OBJ): $(LIB)
+$(FT_O_OBJ): $(LIB) $(INC)
 	gcc -I$(LIBPATH) -I$(INC) $(FLAGS) -c $(FT_C)
 	mkdir $(OBJ) 2> /dev/null || true
 	mv $(FT_O) $(OBJ)

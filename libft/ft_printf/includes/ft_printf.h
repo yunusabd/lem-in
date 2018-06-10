@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 12:03:52 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/05/27 21:20:13 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/10 23:20:19 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "libft.h"
 # include <limits.h>
 
-# define BUFFSIZE 20
+# define BUFFSIZE 128
 # define SPECIFIERS "sSpdDioOuUxXcCb%"
 # define VALID_CHARS "sSpdDioOuUxXcCb%lhjz-+0123456789. #"
 # define SP_LEN (ft_strlen(SPECIFIERS))
