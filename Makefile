@@ -6,7 +6,7 @@
 #    By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/19 13:45:52 by yabdulha          #+#    #+#              #
-#    Updated: 2018/06/07 01:30:19 by yabdulha         ###   ########.fr        #
+#    Updated: 2018/06/10 21:43:14 by yabdulha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = lem-in
 SRC_FILES = parser.c split_line.c get_next_line.c build_farm.c error_handler.c \
 			check_room.c rooms_list.c count_rooms.c hash.c read_links.c \
 			links_list.c solver.c options.c ants_list.c path_list.c \
-			send_ants.c
+			send_ants.c main.c print_path.c
 
 SRCS = $(SRC_FILES)
 
@@ -50,11 +50,11 @@ printfcomp:
 libftcomp:
 	@make -C libft/ all
 
-$(NAME): $(OBJS_NAME) $(INCLUDES_PATH)
+$(NAME): $(OBJS_NAME)
 	@gcc -o $(NAME) $(OBJS_NAME) libft/libft.a $(FT_PRINTF)
 	@echo '\033[0;32m'***Compiled***'\033[0m'
 
-$(OBJS_NAME): $(SRCS)
+$(OBJS_NAME): $(SRCS) $(INCLUDES_PATH)
 	@echo '\033[0;34m'***Compiling Lem-in***'\033[0m'
 	@gcc -I$(INCLUDES_PATH) -c $(SRCS)
 	@mkdir $(OBJS_PATH) 2> /dev/null || true

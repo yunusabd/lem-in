@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 20:47:36 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/07 01:21:07 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/10 22:33:34 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "get_next_line.h"
 # include "ft_printf.h"
 # include <stdlib.h>
-# include <stdio.h> //TODO remove
 
 # define ANTS 0
 # define START 1
@@ -27,14 +26,16 @@
 # define LINK 5
 # define ERROR 6
 
+# define MAX_ANTS	9999
+
 # define SE			(1 << ('s' - 97))
 # define PATH		(1 << ('p' - 97))
 # define DEBUG		(1 << ('d' - 97))
-# define HT			(1 << ('h' - 97))
+# define HELP		(1 << ('h' - 97))
 # define ROOMS		(1 << ('r' - 97))
-# define COLORS		(1 << 3)
-# define HIDE		(1 << 4)
-# define SLOW		(1 << 5)
+# define AN			(1 << ('a' - 97))
+# define ON			(1 << ('o' - 97))
+# define NO			(1 << ('n' - 97))
 
 typedef	struct	s_info
 {
@@ -93,7 +94,6 @@ typedef struct	s_farm
 	int				ants_no;
 	t_room			*rooms;
 	t_link			*links;
-	char			*error;
 	int				flag : 4;
 	t_room			*start;
 	t_room			*end;
@@ -113,24 +113,26 @@ void			free_arr(char **arr);
 void			free_path(t_farm *farm);
 void			free_info(t_info *info);
 t_farm			*build_farm(void);
-void			parsing_error_handler(t_farm *farm, t_info *info);
+void			parsing_error_handler(t_farm *farm, t_info *info, char *error);
 int				ft_hash(char *str, int rooms);
 void			free_ht(t_farm *farm);
 
 t_data			**create_ht(int size);
 void			fill_hashtable(t_farm *farm, t_info *info);
 void			read_link(t_farm *farm, t_info *info);
-
+void			room(t_farm *farm, t_info *info);
+void			detect_type(t_farm *farm, t_info *info);
+void			print_usage(t_farm *farm);
+void			read_input(t_farm *farm);
+void			check_error(t_farm *farm);
 t_link			*next_level(t_farm *farm, t_link *old, t_link *new);
-
 int				solver(t_farm *farm, t_link *links, int depth);
 t_link			*create_link(t_farm *farm, unsigned int hash,
-		t_room *parent, t_link *par);
+		t_link *par);
 void			save_link(t_farm *farm, t_link *head, unsigned int hash,
-		t_room *parent, t_link *par);
-
+		t_link *par);
 void			send_ants(t_farm *farm);
-
+void			print_path(t_farm *farm);
 void			check_room(t_farm *farm, t_info *info);
 int				count_rooms(t_farm *farm);
 void			add_room(t_farm *farm, t_info *info);

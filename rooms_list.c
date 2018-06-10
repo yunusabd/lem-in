@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 00:12:53 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/07 01:29:15 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/07 17:38:09 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static t_room	*create_rooms(t_farm *farm, t_info *info)
 {
 	t_room	*new;
 
-	if (!(new = (t_room*)malloc(sizeof(*new))))
-		parsing_error_handler(farm, NULL);
+	if (!(new = (t_room*)malloc(sizeof(*new))) ||
+			(!(new->s = ft_strdup(info->arr[0]))))
+		parsing_error_handler(farm, NULL, NULL);
 	new->nb = 0;
-	new->s = ft_strdup(info->arr[0]);
 	new->x = ft_atoi(info->arr[1]);
 	new->y = ft_atoi(info->arr[2]);
 	new->links = NULL;
@@ -58,7 +58,7 @@ void			add_room(t_farm *farm, t_info *info)
 	else
 	{
 		if (!(new = (t_room*)malloc(sizeof(*new))))
-			parsing_error_handler(farm, info);
+			parsing_error_handler(farm, info, NULL);
 		new->nb = i++;
 		new->s = ft_strdup(info->arr[0]);
 		new->x = ft_atoi(info->arr[1]);

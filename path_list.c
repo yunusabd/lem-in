@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 00:12:53 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/07 01:29:15 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/07 17:28:36 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_path	*create_path(t_farm *farm, t_room *room)
 	t_path	*new;
 
 	if (!(new = (t_path*)malloc(sizeof(*new))))
-		parsing_error_handler(farm, NULL);
+		parsing_error_handler(farm, NULL, NULL);
 	new->room = room;
 	new->occupied = 0;
 	new->next = NULL;
@@ -46,7 +46,7 @@ void			add_path(t_farm *farm, t_room *room)
 	else
 	{
 		if (!(new = (t_path*)malloc(sizeof(*new))))
-			parsing_error_handler(farm, NULL);
+			parsing_error_handler(farm, NULL, NULL);
 		new->room = room;
 		new->occupied = 0;
 		new->next = farm->path;

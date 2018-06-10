@@ -6,13 +6,13 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 15:40:46 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/05/31 15:46:05 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/07 01:33:53 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int     ft_power(int nb, int power)
+int		ft_power(int nb, int power)
 {
-	    return ((power > 0) ? nb * ft_power(nb, power - 1) : 1);
+	return ((power > 0) ? nb * ft_power(nb, power - 1) : 1);
 }

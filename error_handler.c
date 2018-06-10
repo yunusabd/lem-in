@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 22:30:17 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/07 01:29:15 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/07 17:19:43 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,17 @@ void			free_info(t_info *info)
 	free(info);
 }
 
-void			parsing_error_handler(t_farm *farm, t_info *info)
+void			parsing_error_handler(t_farm *farm, t_info *info, char *error)
 {
 	t_room *tmp;
 
 	if (!farm)
 		exit(1);
 	if (info)
-		ft_printf("%s at line %d\n", (farm->error) ? farm->error : "Error",
+		ft_printf("%s at line %d\n", (error) ? error : "Error",
 				info->line_no);
-	else if (farm->error)
-		ft_printf("%s\n", farm->error);
+	else if (error)
+		ft_printf("%s\n", error);
 	if ((farm->ants))
 		free_ants(farm);
 	if ((farm->hashtable))
@@ -102,7 +102,6 @@ void			parsing_error_handler(t_farm *farm, t_info *info)
 	if ((info))
 		free_info(info);
 	free_path(farm);
-	free(farm->error);
 	free(farm);
 	exit(1);
 }

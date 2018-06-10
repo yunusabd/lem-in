@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 22:48:37 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/07 01:29:29 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/10 22:38:21 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,9 @@ t_link			*next_level(t_farm *farm, t_link *old, t_link *new)
 			if (farm->hashtable[tmp2->hash]->ptr->visited == 0)
 			{
 				if (!new)
-					new = create_link(farm, tmp2->hash,
-							farm->hashtable[tmp->hash]->ptr, tmp);
+					new = create_link(farm, tmp2->hash, tmp);
 				else
-					save_link(farm, new, tmp2->hash,
-							farm->hashtable[tmp->hash]->ptr, tmp);
+					save_link(farm, new, tmp2->hash, tmp);
 				farm->hashtable[tmp2->hash]->ptr->visited = 1;
 			}
 			tmp2 = tmp2->next;
@@ -85,7 +83,7 @@ int				solver(t_farm *farm, t_link *links, int depth)
 	else
 	{
 		if (!(links = next_level(farm, links, NULL)))
-			parsing_error_handler(farm, NULL);
+			parsing_error_handler(farm, NULL, "No path found");
 		if (solver(farm, links, depth + 1))
 		{
 			free_levels(links);

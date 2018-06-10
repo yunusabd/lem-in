@@ -6,24 +6,24 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 23:49:46 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/07 01:29:15 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/07 17:40:46 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/lem_in.h"
 
-static void	check_duplicate(t_farm *farm, t_info *info, char *name)
+static void	check_duplicate(t_farm *farm, t_info *info)
 {
 	t_room *tmp;
 
 	tmp = farm->rooms;
 	while (tmp)
 	{
-		if (ft_strcmp(tmp->s, name) == 0)
-		{
-			farm->error = ft_strdup("Duplicate room name");
-			parsing_error_handler(farm, info);
-		}
+		if (ft_strcmp(tmp->s, info->arr[0]) == 0)
+			parsing_error_handler(farm, info, "Duplicate room names");
+		else if (tmp->x == ft_atoi(info->arr[1]) &&
+				tmp->y == ft_atoi(info->arr[2]))
+			parsing_error_handler(farm, info, "Duplicate coordinates");
 		tmp = tmp->next;
 	}
 }
@@ -33,21 +33,18 @@ void		check_room(t_farm *farm, t_info *info)
 	if (ft_count_char(info->line, ' ') > 1)
 	{
 		if (!(info->arr = split_line(info->line, ' ')))
-			parsing_error_handler(farm, info);
+			parsing_error_handler(farm, info, NULL);
 	}
 	else
-		parsing_error_handler(farm, info);
+		parsing_error_handler(farm, info, "Invalid room");
+	if (!(info->arr) || !(info->arr[0]))
+		parsing_error_handler(farm, info, NULL);
+	if (info->arr[0][0] == 'L')
+		parsing_error_handler(farm, info, "Room name can't start with 'L'");
 	if (ft_strchr(info->arr[0], '-'))
-	{
-		if (!(farm->error = ft_strdup("Dash in room name")))
-			farm->error = NULL;
-		parsing_error_handler(farm, info);
-	}
+		parsing_error_handler(farm, info, "Dash in room name");
 	if (!(info->arr[0]) ||
 			(!(ft_isnumber(info->arr[1]) && (ft_isnumber(info->arr[2])))))
-	{
-		farm->error = ft_strdup("Error");
-		parsing_error_handler(farm, info);
-	}
-	check_duplicate(farm, info, info->arr[0]);
+		parsing_error_handler(farm, info, "Error");
+	check_duplicate(farm, info);
 }

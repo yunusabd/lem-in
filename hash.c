@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 00:49:00 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/07 01:29:15 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/07 17:32:25 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	fill_hashtable(t_farm *farm, t_info *info)
 	{
 		hash = ft_hash(tmp->s, farm->room_no);
 		if (!(farm->hashtable[hash] = create_entry(tmp)))
-			parsing_error_handler(farm, info);
+			parsing_error_handler(farm, info, NULL);
 		tmp = tmp->next;
 	}
 }
