@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 11:33:16 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/11 21:53:16 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/11 23:53:36 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,10 @@ void			check_error(t_farm *farm)
 	if (farm->flags & SE)
 	{
 		if (farm->flags & NO)
-		ft_printf("Start room: %s, end room: %s\n\n",
-				farm->start->s, farm->end->s);
+			ft_printf("Start room: %s, end room: %s\n\n",
+					farm->start->s, farm->end->s);
 		else
-		ft_printf("\nStart room: %s, end room: %s\n",
-				farm->start->s, farm->end->s);
+			ft_printf("\nStart room: %s, end room: %s\n",
+					farm->start->s, farm->end->s);
 	}
 }

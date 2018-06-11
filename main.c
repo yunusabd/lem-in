@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 21:03:20 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/11 21:43:00 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/11 23:52:53 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int				main(int ac, char **av)
 	check_error(farm);
 	link = create_link(farm,
 			ft_hash(farm->start->s, count_rooms(farm)), NULL);
-	(farm->flags & NO) ? 0: ft_printf("\n");
+	(farm->flags & NO) ? 0 : ft_printf("\n");
 	solver(farm, link, 0);
 	send_ants(farm);
 	(farm->flags & AN) ? ft_printf("\n%d ants\n", farm->ants_no) : 0;

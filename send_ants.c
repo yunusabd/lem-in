@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 20:37:11 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/11 22:07:26 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/11 23:52:30 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Create ants, move them through the path.
 */
 
-void	create_ants(t_farm *farm)
+static void		create_ants(t_farm *farm)
 {
 	int		tmp;
 
@@ -25,36 +25,46 @@ void	create_ants(t_farm *farm)
 		add_ant(farm, farm->path, tmp--);
 }
 
+static void		remove_ant(t_farm *farm, t_ant **ant)
+{
+	t_ant	*ptr;
+
+	ptr = (*ant)->next;
+	delete_ant(farm);
+	*ant = ptr;
+}
+
+static void		print_ant(t_farm *farm, t_ant *tmp)
+{
+	(tmp != farm->ants) ? ft_printf(" ") : 0;
+	if (farm->flags & CO)
+		ft_printf("%s%d%sL%d-%s", "\x1B[", 31 + tmp->nb % 7, "m", tmp->nb,
+				tmp->path->room->s);
+	else
+		ft_printf("L%d-%s", tmp->nb, tmp->path->room->s);
+}
+
 /*
 ** For each ant, check if the next room is empty, then move it.
 */
 
-void	send_ants(t_farm *farm)
+void			send_ants(t_farm *farm)
 {
 	t_ant	*tmp;
-	t_ant	*ptr;
-	int		i = 31;
 
 	create_ants(farm);
 	tmp = farm->ants;
 	while (farm->ants)
 	{
 		if (tmp->path->room == farm->end)
-		{
-			ptr = tmp->next;
-			delete_ant(farm);
-			tmp = ptr;
-		}
+			remove_ant(farm, &tmp);
 		else if (tmp->path->next->occupied == 0 ||
 				tmp->path->next->room == farm->end)
 		{
 			tmp->path->occupied = 0;
 			tmp->path = tmp->path->next;
 			tmp->path->occupied = 1;
-			(tmp != farm->ants) ? ft_printf(" ") : 0;
-			(farm->flags & CO) ? ft_printf("%s%d%sL%d-%s", "\x1B[",
-					i + tmp->nb % 7, "m", tmp->nb, tmp->path->room->s)
-				: ft_printf("L%d-%s", tmp->nb, tmp->path->room->s);
+			print_ant(farm, tmp);
 			tmp = tmp->next;
 		}
 		else
