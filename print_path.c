@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 21:03:20 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/10 21:42:30 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/11 18:06:11 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,16 @@ void		print_path(t_farm *farm)
 	t_path	*tmp;
 
 	tmp = farm->path;
+	ft_printf("\nPath: ");
 	while ((farm->flags & PATH) && tmp)
 	{
-		ft_printf("=> %s ", tmp->room->s);
+		if (tmp != farm->path)
+			ft_printf("=> %s", tmp->room->s);
+		else
+			ft_printf("%s", tmp->room->s);
 		tmp = tmp->next;
+		if (tmp)
+			ft_printf(" ");
 	}
+	ft_printf("\n");
 }

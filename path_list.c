@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 00:12:53 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/07 17:28:36 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/11 22:08:03 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static t_path	*create_path(t_farm *farm, t_room *room)
 void			add_path(t_farm *farm, t_room *room)
 {
 	t_path	*new;
-	t_path	*tmp;
 
 	if (!(farm->path))
 		farm->path = create_path(farm, room);

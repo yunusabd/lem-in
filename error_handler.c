@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 22:30:17 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/07 17:19:43 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/11 22:05:49 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ void			free_info(t_info *info)
 
 void			parsing_error_handler(t_farm *farm, t_info *info, char *error)
 {
-	t_room *tmp;
-
 	if (!farm)
 		exit(1);
 	if (info)

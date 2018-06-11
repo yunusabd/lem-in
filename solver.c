@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 22:48:37 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/10 22:38:21 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/11 22:06:34 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,6 @@ t_link			*next_level(t_farm *farm, t_link *old, t_link *new)
 
 int				solver(t_farm *farm, t_link *links, int depth)
 {
-	t_link	*tmp;
-	t_link	*tmp2;
-
 	if (check_links(farm, links))
 		return (1);
 	else

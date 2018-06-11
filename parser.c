@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 11:33:16 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/10 22:42:45 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/11 21:53:16 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void			room(t_farm *farm, t_info *info)
 void			detect_type(t_farm *farm, t_info *info)
 {
 	(!(farm->flags & NO)) ? ft_printf("%s\n", info->line) : 0;
-	if (ft_count_char(info->line, '-') > 1)
+	if (ft_count_char(info->line, '-') > 2)
 		parsing_error_handler(farm, info, NULL);
 	if (ft_isnumber(info->line))
 	{
@@ -52,13 +52,14 @@ void			detect_type(t_farm *farm, t_info *info)
 void			print_usage(t_farm *farm)
 {
 	ft_printf("Usage:\t ./lem-in < input_file\n");
-	ft_printf("\tOptions:\n");
-	ft_printf("\t\t[-s]: Print start and end room\n");
-	ft_printf("\t\t[-p]: Print path\n");
-	ft_printf("\t\t[-r]: Print number of rooms\n");
-	ft_printf("\t\t[-a]: Print number of ants\n");
-	ft_printf("\t\t[-n]: Suppress printing of input file contents\n");
-	ft_printf("\t\t[-h]: Help\n");
+	ft_printf("Options:\n");
+	ft_printf("\t[-a]: Print number of ants\n");
+	ft_printf("\t[-c]: Colorful ants\n");
+	ft_printf("\t[-h]: Help\n");
+	ft_printf("\t[-n]: Suppress printing of input file contents\n");
+	ft_printf("\t[-p]: Print path\n");
+	ft_printf("\t[-r]: Print number of rooms\n");
+	ft_printf("\t[-s]: Print start and end room\n");
 	parsing_error_handler(farm, NULL, NULL);
 }
 
@@ -95,6 +96,12 @@ void			check_error(t_farm *farm)
 	if (farm->ants_no > MAX_ANTS)
 		parsing_error_handler(farm, NULL, "Too many ants to simulate.");
 	if (farm->flags & SE)
-		ft_printf("Start room: %s, end room: %s\n",
+	{
+		if (farm->flags & NO)
+		ft_printf("Start room: %s, end room: %s\n\n",
 				farm->start->s, farm->end->s);
+		else
+		ft_printf("\nStart room: %s, end room: %s\n",
+				farm->start->s, farm->end->s);
+	}
 }

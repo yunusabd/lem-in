@@ -6,7 +6,7 @@
 #    By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/19 13:45:52 by yabdulha          #+#    #+#              #
-#    Updated: 2018/06/10 21:43:14 by yabdulha         ###   ########.fr        #
+#    Updated: 2018/06/11 22:05:16 by yabdulha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,8 @@ SRC_FILES = parser.c split_line.c get_next_line.c build_farm.c error_handler.c \
 			send_ants.c main.c print_path.c
 
 SRCS = $(SRC_FILES)
+
+FLAGS = -Werror -Wextra -Wall
 
 OBJS_PATH = objects/
 OBJS_NAME = $(SRC_FILES:.c=.o)
@@ -56,7 +58,7 @@ $(NAME): $(OBJS_NAME)
 
 $(OBJS_NAME): $(SRCS) $(INCLUDES_PATH)
 	@echo '\033[0;34m'***Compiling Lem-in***'\033[0m'
-	@gcc -I$(INCLUDES_PATH) -c $(SRCS)
+	@gcc $(FLAGS) -I$(INCLUDES_PATH) -c $(SRCS)
 	@mkdir $(OBJS_PATH) 2> /dev/null || true
 
 clean:

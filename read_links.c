@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 17:12:37 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/07 17:29:22 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/11 22:06:04 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void			read_link(t_farm *farm, t_info *info)
 {
 	char			**rooms;
 	int				size;
-	int				i;
 	unsigned int	hash1;
 	unsigned int	hash2;
 

@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 20:47:36 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/10 22:33:34 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/11 22:08:23 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@
 # define COMMENT 4
 # define LINK 5
 # define ERROR 6
-
+# define KRED  "\x1B[31m"
+# define KNRM  "\x1B[0m"
 # define MAX_ANTS	9999
 
 # define SE			(1 << ('s' - 97))
+# define CO			(1 << ('c' - 97))
 # define PATH		(1 << ('p' - 97))
 # define DEBUG		(1 << ('d' - 97))
 # define HELP		(1 << ('h' - 97))
@@ -141,7 +143,7 @@ void			delete_room(t_farm *farm, t_room *room);
 void			add_path(t_farm *farm, t_room *room);
 
 void			add_ant(t_farm *farm, t_path *path, int nb);
-void			delete_ant(t_farm *farm, t_ant *ant);
+void			delete_ant(t_farm *farm);
 
 void			add_link(t_farm *farm, t_room *room, unsigned int hash);
 void			delete_link(t_farm *farm, t_link *link);
