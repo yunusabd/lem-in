@@ -6,11 +6,11 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 23:49:46 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/07 17:40:46 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/12 15:54:32 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/lem_in.h"
+#include "lem_in.h"
 
 static void	check_duplicate(t_farm *farm, t_info *info)
 {

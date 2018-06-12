@@ -6,11 +6,11 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 21:03:20 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/11 18:06:11 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/12 15:54:20 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/lem_in.h"
+#include "lem_in.h"
 
 void		print_path(t_farm *farm)
 {

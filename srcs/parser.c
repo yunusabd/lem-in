@@ -6,11 +6,11 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 11:33:16 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/12 01:20:01 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/12 15:54:05 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/lem_in.h"
+#include "lem_in.h"
 
 void			room(t_farm *farm, t_info *info)
 {

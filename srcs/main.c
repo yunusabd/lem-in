@@ -6,11 +6,11 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 21:03:20 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/12 00:59:00 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/12 15:53:50 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/lem_in.h"
+#include "lem_in.h"
 
 int				main(int ac, char **av)
 {
