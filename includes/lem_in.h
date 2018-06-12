@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 20:47:36 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/11 22:08:23 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/12 01:57:32 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,13 @@ typedef struct	s_room
 	int				flag : 2;
 	t_link			*links;
 	int				visited;
-	int				occupied;
 	struct s_room	*next;
 }				t_room;
 
 typedef struct	s_path
 {
 	t_room			*room;
-	int				occupied;
+	int				o;
 	struct s_path	*next;
 }				t_path;
 

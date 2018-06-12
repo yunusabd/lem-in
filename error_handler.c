@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 22:30:17 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/11 22:05:49 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/12 01:07:43 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,13 @@ void			parsing_error_handler(t_farm *farm, t_info *info, char *error)
 {
 	if (!farm)
 		exit(1);
-	if (info)
+	if (info && (farm->flags & DEBUG))
 		ft_printf("%s at line %d\n", (error) ? error : "Error",
 				info->line_no);
-	else if (error)
+	else if (error && (farm->flags & DEBUG))
 		ft_printf("%s\n", error);
+	else if (error && ft_strcmp(error, "OK") != 0)
+		ft_printf("ERROR\n");
 	if ((farm->ants))
 		free_ants(farm);
 	if ((farm->hashtable))

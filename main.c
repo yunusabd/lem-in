@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 21:03:20 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/11 23:52:53 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/12 00:59:00 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ int				main(int ac, char **av)
 	(farm->flags & ROOMS) ? ft_printf("\n%d rooms\n", farm->room_no) : 0;
 	(farm->flags & PATH) ? print_path(farm) : 0;
 	free(link);
-	parsing_error_handler(farm, NULL, NULL);
+	parsing_error_handler(farm, NULL, "OK");
 	return (0);
 }

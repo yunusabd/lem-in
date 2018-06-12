@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 11:33:16 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/11 23:53:36 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/12 01:20:01 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void			print_usage(t_farm *farm)
 	ft_printf("Options:\n");
 	ft_printf("\t[-a]: Print number of ants\n");
 	ft_printf("\t[-c]: Colorful ants\n");
+	ft_printf("\t[-d]: Debug mode\n");
 	ft_printf("\t[-h]: Help\n");
 	ft_printf("\t[-n]: Suppress printing of input file contents\n");
 	ft_printf("\t[-p]: Print path\n");

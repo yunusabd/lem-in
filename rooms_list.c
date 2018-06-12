@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 00:12:53 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/07 17:38:09 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/12 01:57:51 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static t_room	*create_rooms(t_farm *farm, t_info *info)
 	new->links = NULL;
 	new->next = NULL;
 	new->visited = 0;
-	new->occupied = 0;
 	new->flag = farm->flag;
 	(farm->flag == START) ? farm->start = new : 0;
 	(farm->flag == END) ? farm->end = new : 0;
