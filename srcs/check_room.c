@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 23:49:46 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/12 15:54:32 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/18 18:34:34 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ void		check_room(t_farm *farm, t_info *info)
 	if (ft_count_char(info->line, ' ') > 1)
 	{
 		if (!(info->arr = split_line(info->line, ' ')))
-			parsing_error_handler(farm, info, NULL);
+			parsing_error_handler(farm, info, "Invalid room");
 	}
 	else
 		parsing_error_handler(farm, info, "Invalid room");
 	if (!(info->arr) || !(info->arr[0]))
-		parsing_error_handler(farm, info, NULL);
+		parsing_error_handler(farm, info, "Invalid room");
 	if (info->arr[0][0] == 'L')
 		parsing_error_handler(farm, info, "Room name can't start with 'L'");
 	if (ft_strchr(info->arr[0], '-'))

@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 11:33:16 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/12 15:54:05 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/18 18:36:06 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void			room(t_farm *farm, t_info *info)
 {
 	if (!(ft_count_char(info->line, ' ') > 1) || (farm->hashtable))
-		parsing_error_handler(farm, info, NULL);
+		parsing_error_handler(farm, info, "Invalid input");
 	info->type = ROOM;
 	check_room(farm, info);
 	add_room(farm, info);
@@ -33,7 +33,7 @@ void			detect_type(t_farm *farm, t_info *info)
 	if (ft_isnumber(info->line))
 	{
 		if (farm->rooms || farm->hashtable)
-			parsing_error_handler(farm, info, NULL);
+			parsing_error_handler(farm, info, "Invalid input");
 		else
 			farm->ants_no = ft_atoi(info->line);
 	}
@@ -96,6 +96,8 @@ void			check_error(t_farm *farm)
 		parsing_error_handler(farm, NULL, "Looks like there are no ants :(");
 	if (farm->ants_no > MAX_ANTS)
 		parsing_error_handler(farm, NULL, "Too many ants to simulate.");
+	if (!(farm->hashtable))
+		parsing_error_handler(farm, NULL, "No connections");
 	if (farm->flags & SE)
 	{
 		if (farm->flags & NO)
