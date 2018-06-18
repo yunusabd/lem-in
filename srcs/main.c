@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 21:03:20 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/18 18:20:53 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/18 21:09:58 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,5 @@ int				main(int ac, char **av)
 	(farm->flags & PATH) ? print_path(farm) : 0;
 	free(link);
 	parsing_error_handler(farm, NULL, "OK");
-	while (1)
 	return (0);
 }

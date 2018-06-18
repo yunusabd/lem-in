@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 22:30:17 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/12 01:07:43 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/18 21:14:15 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,7 @@ void			parsing_error_handler(t_farm *farm, t_info *info, char *error)
 		free_info(info);
 	free_path(farm);
 	free(farm);
+	if (error && ft_strcmp(error, "OK") == 0)
+		return ;
 	exit(1);
 }
