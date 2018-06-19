@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 17:12:37 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/13 23:57:48 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/19 16:02:16 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void			read_link(t_farm *farm, t_info *info)
 	unsigned int	hash1;
 	unsigned int	hash2;
 
+	if (info->line && ft_count_char(info->line, '-') > 1)
+		parsing_error_handler(farm, info, "Bad link");
 	rooms = ft_strsplit(info->line, '-');
 	if (farm->room_no == 0)
 		farm->room_no = count_rooms(farm);
