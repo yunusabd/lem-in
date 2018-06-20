@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 20:47:36 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/12 01:57:32 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/20 19:11:27 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef	struct	s_info
 typedef struct	s_link
 {
 	unsigned int	hash;
+	struct s_room	*room;
+	char			*s;
 	struct s_room	*parent;
 	struct s_link	*par;
 	struct s_link	*next;
@@ -87,6 +89,7 @@ typedef struct	s_data
 {
 	unsigned int	key;
 	t_room			*ptr;
+	struct s_data	*next;
 }				t_data;
 
 typedef struct	s_farm
@@ -106,7 +109,7 @@ typedef struct	s_farm
 }				t_farm;
 
 int				options(char *s);
-
+t_data			*ht(t_farm *farm, char *key, unsigned int hash);
 void			free_ht(t_farm *farm);
 void			free_levels(t_link *level);
 char			**split_line(char *s, char c);
@@ -128,10 +131,8 @@ void			read_input(t_farm *farm);
 void			check_error(t_farm *farm);
 t_link			*next_level(t_farm *farm, t_link *old, t_link *new);
 int				solver(t_farm *farm, t_link *links, int depth);
-t_link			*create_link(t_farm *farm, unsigned int hash,
-		t_link *par);
-void			save_link(t_farm *farm, t_link *head, unsigned int hash,
-		t_link *par);
+t_link			*create_link(t_farm *farm, t_room *room, t_link *par);
+void			save_link(t_farm *farm, t_link *head, t_room *room,	t_link *par);
 void			send_ants(t_farm *farm);
 void			print_path(t_farm *farm);
 void			check_room(t_farm *farm, t_info *info);
@@ -144,7 +145,7 @@ void			add_path(t_farm *farm, t_room *room);
 void			add_ant(t_farm *farm, t_path *path, int nb);
 void			delete_ant(t_farm *farm);
 
-void			add_link(t_farm *farm, t_room *room, unsigned int hash);
+void			add_link(t_farm *farm, t_room *room, t_room *link);
 void			delete_link(t_farm *farm, t_link *link);
 
 #endif

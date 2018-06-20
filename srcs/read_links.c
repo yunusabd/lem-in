@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 17:12:37 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/19 16:02:16 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/20 19:13:13 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void			read_link(t_farm *farm, t_info *info)
 	hash2 = ft_hash(rooms[1], size);
 	if (!(((farm->hashtable)[hash1]) && (farm->hashtable)[hash2]))
 		parsing_error_handler(farm, info, "Negative coordinates / Bad link");
+	add_link(farm, (ht(farm, rooms[0], hash1))->ptr, (ht(farm, rooms[1], hash2))->ptr);
+	add_link(farm, (ht(farm, rooms[1], hash2))->ptr, (ht(farm, rooms[0], hash1))->ptr);
 	free_rooms(rooms);
-	add_link(farm, farm->hashtable[hash1]->ptr, hash2);
-	add_link(farm, farm->hashtable[hash2]->ptr, hash1);
 }

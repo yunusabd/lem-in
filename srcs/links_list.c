@@ -6,22 +6,25 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 21:57:26 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/10 22:37:32 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/20 20:52:23 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_link	*create_link(t_farm *farm, unsigned int hash, t_link *par)
+t_link	*create_link(t_farm *farm, t_room *room, t_link *par)
 {
 	t_link	*new;
+	int		hash;
 
 	if (!(new = (t_link*)malloc(sizeof(*new))))
 		parsing_error_handler(farm, NULL, NULL);
+	hash = ft_hash(room->s, farm->room_no);
+	new->room = room;
 	new->hash = hash;
 	new->par = par;
 	if (par)
-		farm->hashtable[par->hash]->ptr->visited = 1;
+		par->room->visited = 1;
 	new->next = NULL;
 	return (new);
 }
@@ -41,19 +44,22 @@ void	delete_link(t_farm *farm, t_link *cn)
 	}
 }
 
-void	save_link(t_farm *farm, t_link *head, unsigned int hash, t_link *par)
+void	save_link(t_farm *farm, t_link *head, t_room *room, t_link *par)
 {
 	t_link	*new;
 	t_link	*tmp;
+	int		hash;
 
 	if (!head)
 		return ;
 	if (!(new = (t_link*)malloc(sizeof(*new))))
 		parsing_error_handler(farm, NULL, NULL);
+	hash = ft_hash(room->s, farm->room_no);
 	new->hash = hash;
 	new->par = par;
+	new->room = room;
 	if (par)
-		farm->hashtable[par->hash]->ptr->visited = 1;
+		par->room->visited = 1;
 	new->next = NULL;
 	tmp = head;
 	while (tmp && tmp->next != NULL)
@@ -61,7 +67,11 @@ void	save_link(t_farm *farm, t_link *head, unsigned int hash, t_link *par)
 	tmp->next = new;
 }
 
-void	add_link(t_farm *farm, t_room *room, unsigned int hash)
+/*
+** Adds a link to a room.
+*/
+
+void	add_link(t_farm *farm, t_room *room, t_room *link)
 {
 	t_link	*new;
 	t_link	*tmp;
@@ -70,7 +80,7 @@ void	add_link(t_farm *farm, t_room *room, unsigned int hash)
 		return ;
 	if (!(new = (t_link*)malloc(sizeof(*new))))
 		parsing_error_handler(farm, NULL, NULL);
-	new->hash = hash;
+	new->room = link;
 	new->parent = NULL;
 	new->next = NULL;
 	tmp = room->links;

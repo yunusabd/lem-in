@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 22:48:37 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/11 22:06:34 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/20 20:51:23 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,17 @@ static int		check_links(t_farm *farm, t_link *links)
 	tmp = links;
 	while (tmp)
 	{
-		if (farm->hashtable[tmp->hash]->ptr == farm->end)
+		if (tmp->room == farm->end)
 		{
-			add_path(farm, farm->hashtable[tmp->hash]->ptr);
 			while (tmp->par)
 			{
-				add_path(farm, farm->hashtable[tmp->par->hash]->ptr);
-				tmp->par = tmp->par->par;
+				add_path(farm, tmp->room);
+				tmp = tmp->par;
 			}
+			add_path(farm, tmp->room);
 			return (1);
 		}
-		else
-			tmp = tmp->next;
+		tmp = tmp->next;
 	}
 	return (0);
 }
@@ -55,16 +54,16 @@ t_link			*next_level(t_farm *farm, t_link *old, t_link *new)
 	tmp = old;
 	while (tmp)
 	{
-		tmp2 = farm->hashtable[tmp->hash]->ptr->links;
+		tmp2 = tmp->room->links;
 		while (tmp2)
 		{
-			if (farm->hashtable[tmp2->hash]->ptr->visited == 0)
+			if (tmp2->room->visited == 0)
 			{
 				if (!new)
-					new = create_link(farm, tmp2->hash, tmp);
+					new = create_link(farm, tmp2->room, tmp);
 				else
-					save_link(farm, new, tmp2->hash, tmp);
-				farm->hashtable[tmp2->hash]->ptr->visited = 1;
+					save_link(farm, new, tmp2->room, tmp);
+				tmp2->room->visited = 1;
 			}
 			tmp2 = tmp2->next;
 		}
