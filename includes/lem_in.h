@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 20:47:36 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/20 19:11:27 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/20 21:10:18 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void			check_error(t_farm *farm);
 t_link			*next_level(t_farm *farm, t_link *old, t_link *new);
 int				solver(t_farm *farm, t_link *links, int depth);
 t_link			*create_link(t_farm *farm, t_room *room, t_link *par);
-void			save_link(t_farm *farm, t_link *head, t_room *room,	t_link *par);
+void			save_link(t_farm *farm, t_link *head, t_room *room, t_link *pa);
 void			send_ants(t_farm *farm);
 void			print_path(t_farm *farm);
 void			check_room(t_farm *farm, t_info *info);

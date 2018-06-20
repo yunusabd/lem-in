@@ -6,11 +6,15 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 00:49:00 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/20 19:37:20 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/20 21:17:15 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+/*
+** DBJ2 hash function.
+*/
 
 int				ft_hash(char *str, int rooms)
 {
@@ -24,6 +28,10 @@ int				ft_hash(char *str, int rooms)
 	return ((unsigned int)(hash % (rooms * 100)));
 }
 
+/*
+** Creates a t_data struct for stroring in the hashtable.
+*/
+
 t_data			*create_entry(t_room *ptr)
 {
 	t_data	*new;
@@ -34,6 +42,10 @@ t_data			*create_entry(t_room *ptr)
 	new->next = NULL;
 	return (new);
 }
+
+/*
+** Appends a room to an occupied spot in the hashtable, in case of a collision.
+*/
 
 static t_data	*add_entry(t_data *head, t_room *ptr)
 {
@@ -48,6 +60,10 @@ static t_data	*add_entry(t_data *head, t_room *ptr)
 	head->next = new;
 	return (new);
 }
+
+/*
+** Initialized the hashtable. All values are set to NULL.
+*/
 
 t_data			**create_ht(int size)
 {
