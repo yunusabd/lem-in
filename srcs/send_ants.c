@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 20:37:11 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/20 20:51:45 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/21 18:30:34 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,17 @@ void			send_ants(t_farm *farm)
 	while (farm->ants)
 	{
 		if (tmp->path->room == farm->end)
+		{
+			print_ant(farm, tmp);
 			remove_ant(farm, &tmp);
+			ft_printf((farm->ants) ? " " : "%s", KNRM);
+		}
 		else if (tmp->path->next->o == 0 || tmp->path->next->room == farm->end)
 		{
+			print_ant(farm, tmp);
 			tmp->path->o = 0;
 			tmp->path = tmp->path->next;
 			tmp->path->o = 1;
-			print_ant(farm, tmp);
 			tmp = tmp->next;
 		}
 		else
