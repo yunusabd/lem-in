@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 20:37:11 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/21 18:30:34 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/22 19:39:08 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ static void		create_ants(t_farm *farm)
 		add_ant(farm, farm->path, tmp--);
 }
 
+/*
+** Function for removing ants to call when they have reached the end room.
+*/
+
 static void		remove_ant(t_farm *farm, t_ant **ant)
 {
 	t_ant	*ptr;
@@ -33,6 +37,11 @@ static void		remove_ant(t_farm *farm, t_ant **ant)
 	delete_ant(farm);
 	*ant = ptr;
 }
+
+/*
+** Before printing the current ant, put a space, except for the last ant.
+** Two options to print with or withour color depending on the flag.
+*/
 
 static void		print_ant(t_farm *farm, t_ant *tmp)
 {
@@ -45,7 +54,23 @@ static void		print_ant(t_farm *farm, t_ant *tmp)
 }
 
 /*
-** For each ant, check if the next room is empty, then move it.
+** Set next room in path to occupied, set current room to free and move the
+** pointer of the ant to point to the next room.
+*/
+
+static void		move_ant(t_farm *farm, t_ant **tmp)
+{
+	if ((*tmp)->path->room != farm->start)
+		print_ant(farm, *tmp);
+	(*tmp)->path->o = 0;
+	(*tmp)->path = (*tmp)->path->next;
+	(*tmp)->path->o = 1;
+	(*tmp) = (*tmp)->next;
+}
+
+/*
+** For each ant, check if it is at the end room. If not 
+** check if the next room is empty and move it.
 */
 
 void			send_ants(t_farm *farm)
@@ -63,13 +88,7 @@ void			send_ants(t_farm *farm)
 			ft_printf((farm->ants) ? " " : "%s", KNRM);
 		}
 		else if (tmp->path->next->o == 0 || tmp->path->next->room == farm->end)
-		{
-			print_ant(farm, tmp);
-			tmp->path->o = 0;
-			tmp->path = tmp->path->next;
-			tmp->path->o = 1;
-			tmp = tmp->next;
-		}
+			move_ant(farm, &tmp);
 		else
 			tmp = tmp->next;
 		if (!(tmp))
