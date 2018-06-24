@@ -6,7 +6,7 @@
 #    By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/19 13:45:52 by yabdulha          #+#    #+#              #
-#    Updated: 2018/06/12 16:09:41 by yabdulha         ###   ########.fr        #
+#    Updated: 2018/06/23 19:07:15 by yabdulha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = lem-in
 SRC_FILES = parser.c split_line.c get_next_line.c build_farm.c error_handler.c \
 			check_room.c rooms_list.c count_rooms.c hash.c read_links.c \
 			links_list.c solver.c options.c ants_list.c path_list.c \
-			send_ants.c main.c print_path.c
+			send_ants.c main.c print_path.c hash_api.c
 SRCS_PATH = srcs/
 SRCS = $(addprefix $(SRCS_PATH),$(SRC_FILES))
 

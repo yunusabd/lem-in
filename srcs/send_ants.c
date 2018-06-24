@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 20:37:11 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/22 19:39:08 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/23 19:01:41 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,12 @@ static void		move_ant(t_farm *farm, t_ant **tmp)
 }
 
 /*
-** For each ant, check if it is at the end room. If not 
+** For each ant, check if it is at the end room. If not
 ** check if the next room is empty and move it.
 */
 
-void			send_ants(t_farm *farm)
+void			send_ants(t_farm *farm, t_ant *tmp)
 {
-	t_ant	*tmp;
-
 	create_ants(farm);
 	tmp = farm->ants;
 	while (farm->ants)
@@ -85,7 +83,10 @@ void			send_ants(t_farm *farm)
 		{
 			print_ant(farm, tmp);
 			remove_ant(farm, &tmp);
-			ft_printf((farm->ants) ? " " : "%s", KNRM);
+			if (farm->flags & CO)
+				ft_printf((farm->ants) ? " " : "%s\n", KNRM);
+			else
+				ft_printf((farm->ants) ? " " : "\n");
 		}
 		else if (tmp->path->next->o == 0 || tmp->path->next->room == farm->end)
 			move_ant(farm, &tmp);

@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 00:49:00 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/20 21:17:15 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/23 19:07:29 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,39 +26,6 @@ int				ft_hash(char *str, int rooms)
 	while ((c = *(str++)))
 		hash = hash * 33 + c;
 	return ((unsigned int)(hash % (rooms * 100)));
-}
-
-/*
-** Creates a t_data struct for stroring in the hashtable.
-*/
-
-t_data			*create_entry(t_room *ptr)
-{
-	t_data	*new;
-
-	if (!(new = (t_data*)malloc(sizeof(*new))))
-		return (NULL);
-	new->ptr = ptr;
-	new->next = NULL;
-	return (new);
-}
-
-/*
-** Appends a room to an occupied spot in the hashtable, in case of a collision.
-*/
-
-static t_data	*add_entry(t_data *head, t_room *ptr)
-{
-	t_data	*new;
-
-	if (!(new = (t_data*)malloc(sizeof(*new))))
-		return (NULL);
-	new->ptr = ptr;
-	new->next = NULL;
-	while (head->next)
-		head = head->next;
-	head->next = new;
-	return (new);
 }
 
 /*
@@ -101,24 +68,6 @@ void			fill_hashtable(t_farm *farm, t_info *info)
 			parsing_error_handler(farm, info, NULL);
 		tmp = tmp->next;
 	}
-}
-
-t_data			*ht(t_farm *farm, char *key, unsigned int hash)
-{
-	t_data	*tmp;
-	char	*l;
-
-	if (!((farm->hashtable[hash])->next))
-		return (farm->hashtable[hash]);
-	tmp = farm->hashtable[hash];
-	l = key;
-	while ((tmp))
-	{
-		if (ft_strcmp(key, tmp->ptr->s) == 0)
-			return (tmp);
-		tmp = tmp->next;
-	}
-	return (NULL);
 }
 
 void			free_ht(t_farm *farm)

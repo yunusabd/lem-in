@@ -6,7 +6,7 @@
 /*   By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 20:06:07 by yabdulha          #+#    #+#             */
-/*   Updated: 2018/06/22 20:06:32 by yabdulha         ###   ########.fr       */
+/*   Updated: 2018/06/24 00:16:19 by yabdulha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define ERROR 6
 # define KRED  "\x1B[31m"
 # define KNRM  "\x1B[0m"
-# define MAX_ANTS	9999
+# define MAX_ANTS	2147483647
 
 # define SE			(1 << ('s' - 97))
 # define CO			(1 << ('c' - 97))
@@ -121,6 +121,9 @@ void			parsing_error_handler(t_farm *farm, t_info *info, char *error);
 int				ft_hash(char *str, int rooms);
 void			free_ht(t_farm *farm);
 
+t_data			*create_entry(t_room *ptr);
+t_data			*add_entry(t_data *head, t_room *ptr);
+
 t_data			**create_ht(int size);
 void			fill_hashtable(t_farm *farm, t_info *info);
 void			read_link(t_farm *farm, t_info *info);
@@ -133,7 +136,7 @@ t_link			*next_level(t_farm *farm, t_link *old, t_link *new);
 int				solver(t_farm *farm, t_link *links, int depth);
 t_link			*create_link(t_farm *farm, t_room *room, t_link *par);
 void			save_link(t_farm *farm, t_link *head, t_room *room, t_link *pa);
-void			send_ants(t_farm *farm);
+void			send_ants(t_farm *farm, t_ant *tmp);
 void			print_path(t_farm *farm);
 void			check_room(t_farm *farm, t_info *info);
 int				count_rooms(t_farm *farm);
