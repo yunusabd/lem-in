@@ -6,7 +6,7 @@
 #    By: yabdulha <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/25 16:29:49 by yabdulha          #+#    #+#              #
-#    Updated: 2018/06/03 19:47:52 by yabdulha         ###   ########.fr        #
+#    Updated: 2018/06/24 02:07:51 by yabdulha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ FT_PRINTF = $(addprefix $(PRINTF_PATH),$(PRINTF_NAME))
 all: $(NAME)
 
 $(OBJ): $(FT_C)
-	$(CC) $(FLAGS) -c $(FT_C)
+	@$(CC) $(FLAGS) -c $(FT_C)
 
 $(NAME): $(FT_C) $(OBJ)
 	@ar rc $(NAME) $(OBJ)
